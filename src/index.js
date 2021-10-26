@@ -1,4 +1,4 @@
-import moment from "moment";
+const moment = require("moment");
 
 /**
  *
@@ -8,19 +8,19 @@ import moment from "moment";
  * @param typeOrder{'asc'|'desc'} ( default 'asc')
  * @return {null|*[]}
  */
-export const sortByKey = (array = [], key = "", isDateTime, typeOrder) => {
-  const isAsc = typeOrder === 'asc' ? 0 : 1
+const sortByKey = (array = [], key = "", isDateTime, typeOrder) => {
+  const isAsc = typeOrder === 'asc' ? 1 : 0
   if(!array?.length) return [];
   if(!array[0] || !array[0][key]) return null
   const type = typeof array[0][key] || null;
   if(type === "string"){
     if(isDateTime) {
       return array.sort(function (a, b) {
-        return isAsc ? moment(a[key]).isBefore(b[key]) : moment(a[key]).isAfter(b[key])
+        return isAsc ? moment(a[key]).diff(moment(b[key])) : moment(a[key]).diff(moment(b[key]))
       })
     }
     return array.sort(function (a, b) {
-      return isAsc ? ('' + a[key]?.attr).localeCompare(b[key]?.attr) : ('' + b[key]?.attr).localeCompare(a[key]?.attr);
+      return isAsc ? ('' + a[key]?.length).localeCompare(b[key]?.length) : ('' + b[key]?.length).localeCompare(a[key]?.length);
     })
   }
   else if(type === "number"){
@@ -43,8 +43,8 @@ export const sortByKey = (array = [], key = "", isDateTime, typeOrder) => {
  * @param typeOrder{'asc'|'desc'}
  * @return {*[]}
  */
-export const sortNumber = (array = [], typeOrder) => {
-  const isAsc = typeOrder === 'asc' ? 0 : 1
+const sortNumber = (array = [], typeOrder) => {
+  const isAsc = typeOrder === 'asc' ? 1 : 0
   if(!array?.length) return []
   return array.sort(function(a, b) {
     return isAsc ? a - b : b - a;
@@ -57,11 +57,11 @@ export const sortNumber = (array = [], typeOrder) => {
  * @param typeOrder{'asc'|'desc'}
  * @return {*[]}
  */
-export const sortString = (array = [], typeOrder) => {
-  const isAsc = typeOrder === 'asc' ? 0 : 1
+const sortString = (array = [], typeOrder) => {
+  const isAsc = typeOrder === 'asc' ? 1 : 0
   if(!array?.length) return []
   return array.sort(function (a, b) {
-    return isAsc ? ('' + a?.attr).localeCompare(b?.attr) : ('' + b?.attr).localeCompare(a?.attr);
+    return isAsc ? ('' + a?.length).localeCompare(b?.length) : ('' + b?.length).localeCompare(a?.length);
   })
 }
 
@@ -71,8 +71,8 @@ export const sortString = (array = [], typeOrder) => {
  * @param typeOrder{'asc'|'desc'}
  * @return {*[]}
  */
-export const sortBool = (array = [], typeOrder) => {
-  const isAsc = typeOrder === 'asc' ? 0 : 1
+const sortBool = (array = [], typeOrder) => {
+  const isAsc = typeOrder === 'asc' ? 1 : 0
   if(!array?.length) return []
   return array.sort(function(a, b) {
     // asc => true values first  || else false values first
@@ -86,10 +86,18 @@ export const sortBool = (array = [], typeOrder) => {
  * @param typeOrder{'asc'|'desc'}
  * @return {*[]}
  */
-export const sortDateTime = (array = [], typeOrder) => {
-  const isAsc = typeOrder === 'asc' ? 0 : 1
+const sortDateTime = (array = [], typeOrder) => {
+  const isAsc = typeOrder === 'asc' ? 1 : 0
   if(!array?.length) return []
-  return array.sort(function (a, b) {
-    return isAsc ? moment(a).isBefore(b) : moment(a).isAfter(b)
+  return array.sort((a, b) => {
+    return isAsc ? moment(a).diff(moment(b)) : moment(b).diff(moment(a))
   })
+}
+
+module.exports = {
+  sortByKey,
+  sortNumber,
+  sortString,
+  sortBool,
+  sortDateTime
 }
