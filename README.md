@@ -54,4 +54,4 @@ console.log({orderByKey})
 
 ## License
 
-MIT © [datnv1098](https://github.com/datnv1098)
+MIT © [datnv1098](https://github.com/datnv1098) [Clasfunc](https://classfunc.com/)
