@@ -7,14 +7,14 @@
 ## Install
 
 ```bash
-npm install --save sort
+npm install --save sort-clf
 ```
 
 ## Usage and example
 
 ```jsx
 const moment = require("moment");
-const {sortNumber, sortBool, sortString, sortDateTime, sortByKey} = require('sort')
+const {sortNumber, sortBool, sortString, sortDateTime, sortByKey} = require('sort-clf')
 
 // example sortNumber
 const orderNumber = sortNumber([3, 6, 87, 2, 4, 2, 5, 7, 8], 'asc');
