@@ -1,10 +1,10 @@
 {
-  "name": "sort",
-  "version": "1.0.0",
+  "name": "sort-clf",
+  "version": "1.0.1",
   "description": "sort every thing",
   "author": "datnv1098",
   "license": "MIT",
-  "repository": "datnv1098/sort",
+  "repository": "git@github.com:datnv1098/sortLibrary.git",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
