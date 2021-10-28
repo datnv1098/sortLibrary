@@ -10,8 +10,7 @@ const moment = require("moment");
  */
 const sortByKey = (array = [], key = "", isDateTime, typeOrder) => {
   const isAsc = typeOrder === 'asc' ? 1 : 0
-  if(!array?.length) return [];
-  if(!array[0] || !array[0][key]) return []
+  if(!array?.length) return []
   const type = typeof array[0][key] || null;
   if(type === "string"){
     if(isDateTime) {
